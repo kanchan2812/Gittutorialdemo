@@ -1,19 +1,20 @@
-// Wait for the DOM content to be fully loaded before manipulating it
-document.addEventListener('DOMContentLoaded', function() {
-    // Get the list of items (ul element) by its ID
-    const itemsList = document.getElementById('items');
-  
-    // Get all the list items (li elements) within the list
-    const items = itemsList.getElementsByTagName('li');
-  
-    // Make the 3rd element (index 2) have a green background color
-    if (items.length >= 3) {
-      items[2].style.backgroundColor = 'green';
-    }
-  
-    // Make all elements in the list have bold font
-    for (let i = 0; i < items.length; i++) {
-      items[i].style.fontWeight = 'bold';
-    }
-  });
-  
+//GETELEMENTBYCLASSNAME
+var items= document.getElementsByClassName('list-group-item');
+console.log(items);
+console.log(items[1]);
+items[1].textContent='Hello 2';
+items[1].style.fontWeight='bold';
+items[1].style.backgroundColor='yellow';
+for(var i=0; i<items.length;i++){
+  items[i].style.backgroundColor='#ccc';
+}
+//GETELEMETBYTAGNAME
+var li= document.getElementsByClassName('li');
+console.log(li);
+console.log(li[1]);
+li[1].textContent='Hello 2';
+li[1].style.fontWeight='bold';
+li[1].style.backgroundColor='yellow';
+for(var i=0; i<li.length;i++){
+  li[i].style.backgroundColor='#ccc';
+}
