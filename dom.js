@@ -1,74 +1,67 @@
-var itemList=document.querySelector('#items');
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
-//parentNode
-console.log(itemList.parentNode);
-itemList.parentNode.style.backgroundColor='#ccc';
-console.log(itemList.parentNode.parentNode.parentNode);
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+// Filter event
+filter.addEventListener('keyup', filterItems);
 
+// Add item
+function addItem(e){
+  e.preventDefault();
 
-//parentElement
-console.log(itemList.parentElement);
-itemList.parentElement.style.backgroundColor='#ccc';
-console.log(itemList.parentElement.parentElement.parentElement);
+  // Get input value
+  var newItem = document.getElementById('item').value;
 
-//childNodes
-console.log(itemList.childNodes);
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
 
-console.log(itemList.children);
-console.log(itemList.children[1]);
-itemList.children[1].style.backgroundColor='yellow'
+  // Create del button element
+  var deleteBtn = document.createElement('button');
 
-//firstChild
-console.log(itemList.firstChild);
+  //create edit button
+  var editBtn = document.createElement('button');
 
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
 
-//firstElementChild
-console.log(itemList.firstElementChild);
-itemList.firstElementChild.textContent='Hello 1';
-
-//LastChild
-console.log(itemList.lastChild);
-
-//LastChildElement
-console.log(itemList.lastElementChild);
-itemList.lastElementChild.textContent='Hello 4';
-
-//nextSibling
-console.log(itemList.nextSibling);
-
-//nextElementSibling
-console.log(itemList.nextElementSibling);
-
-//previousSibling
-console.log(itemList.previousSibling);
-
-//previousElementSibling
-console.log(itemList.previousElementSibling);
-itemList.previousElementSibling.style.color='green';
-
-//CreateElement
-//Create div
-var newDiv=document.createElement('div');
-//Add Class
-newDiv.className='Hello';
-//Add id
-newDiv.id='Hello1';
-
-//Add Attr
-newDiv.setAttribute('title','Hello Div');
-
-//Create text Node
-var newDivText=document.createTextNode('Hello World');
-
-//Add text to div
-
-newDiv.appendChild(newDivText);
+  //add class to edit button
+  // Add classes to del button
+  editBtn.className = 'btn btn-danger btn-sm float-right edit';
 
 
-var container =document.querySelector('header.container');
-var h1=document.querySelector('header h1');
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
 
-console.log(newDiv);
-newDiv.style.fontSize='30px';
+  //append text node edit
+  editBtn.appendChild(document.createTextNode('Edit'));
 
-container.insertBefore(newDiv,h1);
+  // Append button to li
+  li.appendChild(deleteBtn);
+
+  //append button to li
+  li.appendChild(editBtn);
+
+  // Append li to list
+  itemList.appendChild(li);
+
+  itemList.appendChild(li);
+}
+
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
+
