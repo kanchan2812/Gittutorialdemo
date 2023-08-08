@@ -15,43 +15,51 @@ function addItem(e){
 
   // Get input value
   var newItem = document.getElementById('item').value;
+  var dec = document.getElementById('item').value;
+
 
   // Create new li element
   var li = document.createElement('li');
+  
+
   // Add class
   li.className = 'list-group-item';
+
+
+
   // Add text node with input value
   li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(dec));
+
+  
+  //create delete button
+  var editBtn = document.createElement('button');
 
   // Create del button element
   var deleteBtn = document.createElement('button');
 
-  //create edit button
-  var editBtn = document.createElement('button');
+ 
+  //add classes to edit button
+  editBtn.className = 'btn  btn-sm float-right edit';
 
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+   // Add classes to del button
+   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
 
-  //add class to edit button
-  // Add classes to del button
-  editBtn.className = 'btn btn-danger btn-sm float-right edit';
+ 
+  //Append text node
+  editBtn.appendChild(document.createTextNode('EDIT'));
 
+   // Append text node
+   deleteBtn.appendChild(document.createTextNode('X'));
 
-  // Append text node
-  deleteBtn.appendChild(document.createTextNode('X'));
-
-  //append text node edit
-  editBtn.appendChild(document.createTextNode('Edit'));
+  
+  //Append button to li
+  li.appendChild(editBtn);
 
   // Append button to li
   li.appendChild(deleteBtn);
 
-  //append button to li
-  li.appendChild(editBtn);
-
   // Append li to list
-  itemList.appendChild(li);
-
   itemList.appendChild(li);
 }
 
@@ -65,3 +73,19 @@ function removeItem(e){
   }
 }
 
+// Filter Items
+function filterItems(e){
+  // convert text to lowercase
+  var text = e.target.value.toLowerCase();
+  // Get lis
+  var items = itemList.getElementsByTagName('li');
+  // Convert to an array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    if(itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
